@@ -2,6 +2,7 @@ package com.org.recipe.domain;
 
 import javax.persistence.*;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -39,6 +40,13 @@ public class Recipe {
         joinColumns = @JoinColumn(name ="recipe_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new HashSet<>();
+
+//    @CreationTimestamp
+    private Date createTimestamp;
+
+//    @UpdateTimestamp
+    private Date updateTimestamp;
+
 
     public Long getId() {
         return id;
@@ -151,6 +159,25 @@ public class Recipe {
         this.categories = categories;
     }
 
+
+    public Date getCreateTimestamp() {
+        return createTimestamp;
+    }
+
+    @PrePersist
+    public void setCreateTimestamp() {
+        this.createTimestamp = new Date();
+    }
+
+    public Date getUpdateTimestamp() {
+        return updateTimestamp;
+    }
+
+    @PreUpdate
+    public void setUpdateTimestamp() {
+        this.updateTimestamp = new Date();
+    }
+
     @Override
     public String toString() {
         return "Recipe{" +
@@ -167,6 +194,8 @@ public class Recipe {
                 ", notes=" + notes +
                 ", ingredients=" + ingredients +
                 ", categories=" + categories +
+                ", createTimestamp=" + createTimestamp +
+                ", updateTimestamp=" + updateTimestamp +
                 '}';
     }
 }
