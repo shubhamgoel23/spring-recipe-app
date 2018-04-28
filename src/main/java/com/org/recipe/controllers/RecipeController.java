@@ -22,8 +22,6 @@ public class RecipeController {
     public String showById(@PathVariable String id, Model model) {
 
         model.addAttribute("recipe", recipeService.findById(new Long(id)));
-
-
         return "recipe/show";
     }
 
