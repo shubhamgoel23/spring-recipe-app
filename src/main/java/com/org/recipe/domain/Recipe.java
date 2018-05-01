@@ -3,8 +3,9 @@ package com.org.recipe.domain;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Arrays;
 import java.util.Date;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Data
@@ -35,13 +36,13 @@ public class Recipe {
     private Notes notes;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
-    private Set<Ingredient> ingredients = new HashSet<>();
+    private Set<Ingredient> ingredients = new LinkedHashSet<>();
 
     @ManyToMany
     @JoinTable(name = "recipe_category",
             joinColumns = @JoinColumn(name = "recipe_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
-    private Set<Category> categories = new HashSet<>();
+    private Set<Category> categories = new LinkedHashSet<>();
 
     //    @CreationTimestamp
     private Date createTimestamp;
@@ -72,4 +73,24 @@ public class Recipe {
         this.updateTimestamp = new Date();
     }
 
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                ", prepTime=" + prepTime +
+                ", cookTime=" + cookTime +
+                ", servings=" + servings +
+                ", source='" + source + '\'' +
+                ", url='" + url + '\'' +
+                ", directions='" + directions + '\'' +
+                ", difficulty=" + difficulty +
+                ", image=" + Arrays.toString(image) +
+                ", notes=" + notes +
+                ", ingredients=" + ingredients +
+                ", categories=" + categories +
+                ", createTimestamp=" + createTimestamp +
+                ", updateTimestamp=" + updateTimestamp +
+                '}';
+    }
 }

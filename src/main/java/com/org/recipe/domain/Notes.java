@@ -20,4 +20,11 @@ public class Notes {
     @Lob
     private String recipeNotes;
 
+    @Override
+    public String toString() {
+        return "Notes{" +
+                "id=" + id +
+                ", recipeNotes='" + recipeNotes + '\'' +
+                '}';
+    }
 }

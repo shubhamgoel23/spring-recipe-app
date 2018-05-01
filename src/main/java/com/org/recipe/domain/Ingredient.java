@@ -43,4 +43,13 @@ public class Ingredient {
 
     }
 
+    @Override
+    public String toString() {
+        return "Ingredient{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                ", amount=" + amount +
+                ", uom=" + uom +
+                '}';
+    }
 }

@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Optional;
 import java.util.Set;
 
@@ -30,15 +30,16 @@ public class RecipeServiceImpl implements  RecipeService {
     @Override
     public Set<Recipe> getRecipes() {
         log.debug("hello im in RecipeServiceImpl");
-        Set<Recipe> recipes = new HashSet<>();
-        recipeRepository.findAll().iterator().forEachRemaining(recipes::add);
+        Set<Recipe> recipes = new LinkedHashSet<>();
+        recipeRepository.findAllByOrderByIdAsc().iterator().forEachRemaining(recipes::add);
         return recipes;
+
     }
 
     @Override
     public Recipe findById(Long l) {
 
-        Optional<Recipe> recipeOptional = recipeRepository.findById(l);
+        Optional<Recipe> recipeOptional = recipeRepository.findByIdOrderByIngredientsIdAsc(l);
 
         if (!recipeOptional.isPresent()) {
             throw new RuntimeException("Recipe Not Found!");
