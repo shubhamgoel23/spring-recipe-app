@@ -49,7 +49,7 @@ public class RecipeServiceImplTest {
         Set<Recipe> recipes = recipeService.getRecipes();
 
         assertEquals(recipes.size(), 1);
-        verify(recipeRepository, times(1)).findAll();// to verify how many time recipeRepository is called up
+        verify(recipeRepository, times(1)).findAllByOrderByIdAsc();// to verify how many time recipeRepository is called up
         verify(recipeRepository, never()).findById(anyLong());
     }
 
