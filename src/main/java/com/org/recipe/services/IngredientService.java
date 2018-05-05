@@ -1,0 +1,10 @@
+package com.org.recipe.services;
+
+import com.org.recipe.commands.IngredientCommand;
+
+public interface IngredientService {
+
+    IngredientCommand findByRecipeIdAndIngredientId(Long recipeId, Long ingredientId);
+
+    IngredientCommand saveIngredientCommand(IngredientCommand command);
+}
